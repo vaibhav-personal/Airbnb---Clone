@@ -1,0 +1,135 @@
+<%- include('../partials/head') %>
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+  <%- include('../partials/nav') %>
+
+  <main class="flex min-h-[90vh] items-center justify-center px-6 py-12">
+    <div class="grid w-full max-w-6xl overflow-hidden rounded-[40px] bg-slate-900/95 shadow-2xl shadow-slate-950/40 lg:grid-cols-2">
+      <div class="relative hidden lg:block">
+        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop" alt="Luxury Stay" class="h-full w-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+        <div class="absolute bottom-10 left-10 right-10 text-white">
+          <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm text-slate-100 backdrop-blur-md">
+            <i class="fa-solid fa-house"></i>
+            Airbnb Community
+          </div>
+          <h1 class="mt-6 text-5xl font-bold leading-tight">Start Your Journey With Airbnb</h1>
+          <p class="mt-5 text-lg leading-relaxed text-slate-300">Join as a guest or host and explore premium homes, unforgettable stays, and amazing experiences worldwide.</p>
+        </div>
+      </div>
+      <div class="flex items-center justify-center p-8 sm:p-12">
+        <div class="w-full max-w-md">
+          <div class="mb-10">
+            <div class="mb-4 flex items-center gap-4">
+              <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-800 text-sky-300"><i class="fa-solid fa-user-plus text-2xl"></i></div>
+              <div>
+                <h2 class="text-4xl font-bold text-white">Create Account</h2>
+                <p class="mt-1 text-slate-400">Register to continue with Airbnb</p>
+              </div>
+            </div>
+          </div>
+
+          <%- include('../partials/errors') %>
+
+          <form id="signupForm" action="/signup" method="POST" class="space-y-5">
+            <div class="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+              <div>
+                <label class="mb-2 block text-sm font-semibold text-slate-200">First Name</label>
+                <div class="relative">
+                  <span class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"><i class="fa-solid fa-user"></i></span>
+                  <input type="text" id="firstName" name="firstName" placeholder="First Name" value="<%= oldInput.firstName || '' %>" class="w-full rounded-2xl border border-slate-700 bg-slate-950/90 py-4 pl-14 pr-5 text-slate-100 outline-none transition duration-300 focus:border-sky-500 focus:ring-4 focus:ring-slate-800" />
+                </div>
+              </div>
+              <div>
+                <label class="mb-2 block text-sm font-semibold text-slate-200">Last Name</label>
+                <div class="relative">
+                  <span class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"><i class="fa-solid fa-user"></i></span>
+                  <input type="text" id="lastName" name="lastName" placeholder="Last Name" value="<%= oldInput.lastName || '' %>" class="w-full rounded-2xl border border-slate-700 bg-slate-950/90 py-4 pl-14 pr-5 text-slate-100 outline-none transition duration-300 focus:border-sky-500 focus:ring-4 focus:ring-slate-800" />
+                </div>
+              </div>
+            </div>
+            <div>
+              <label class="mb-2 block text-sm font-semibold text-slate-200">Email Address</label>
+              <div class="relative">
+                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"><i class="fa-solid fa-envelope"></i></span>
+                <input type="email" id="email" name="email" placeholder="Enter your email" value="<%= oldInput.email || '' %>" class="w-full rounded-2xl border border-slate-700 bg-slate-950/90 py-4 pl-14 pr-5 text-slate-100 outline-none transition duration-300 focus:border-sky-500 focus:ring-4 focus:ring-slate-800" />
+              </div>
+            </div>
+            <div>
+              <label class="mb-2 block text-sm font-semibold text-slate-200">I want to register as:</label>
+              <div class="relative">
+                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 z-10"><i class="fa-solid fa-users"></i></span>
+                <select id="userType" name="userType" class="w-full appearance-none rounded-2xl border border-slate-700 bg-slate-950/90 py-4 pl-14 pr-5 text-slate-100 outline-none transition duration-300 focus:border-sky-500 focus:ring-4 focus:ring-slate-800">
+                  <option value="">Select User Type</option>
+                  <option value="guest" <%= oldInput.userType === 'guest' ? 'selected' : '' %>>Guest</option>
+                  <option value="host" <%= oldInput.userType === 'host' ? 'selected' : '' %>>Host</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="mb-2 block text-sm font-semibold text-slate-200">Password</label>
+              <div class="relative">
+                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"><i class="fa-solid fa-lock"></i></span>
+                <input type="password" id="password" name="password" placeholder="Create password" class="w-full rounded-2xl border border-slate-700 bg-slate-950/90 py-4 pl-14 pr-14 text-slate-100 outline-none transition duration-300 focus:border-sky-500 focus:ring-4 focus:ring-slate-800" />
+                <button type="button" id="togglePassword" class="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-sky-300 transition duration-200"><i id="togglePasswordIcon" class="fa-solid fa-eye"></i></button>
+              </div>
+            </div>
+            <div>
+              <label class="mb-2 block text-sm font-semibold text-slate-200">Confirm Password</label>
+              <div class="relative">
+                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"><i class="fa-solid fa-shield-halved"></i></span>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" class="w-full rounded-2xl border border-slate-700 bg-slate-950/90 py-4 pl-14 pr-14 text-slate-100 outline-none transition duration-300 focus:border-sky-500 focus:ring-4 focus:ring-slate-800" />
+                <button type="button" id="toggleConfirmPassword" class="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-sky-300 transition duration-200"><i id="toggleConfirmPasswordIcon" class="fa-solid fa-eye"></i></button>
+              </div>
+            </div>
+            <label class="flex items-start gap-3 text-sm text-slate-400">
+              <input type="checkbox" id="terms" name="terms" class="mt-1 h-4 w-4 rounded border-slate-700 bg-slate-950 text-sky-500 focus:ring-sky-500" />
+              <span>I agree to the <a href="#" class="font-medium text-sky-300 hover:text-sky-200">Terms & Conditions</a> and <a href="#" class="font-medium text-sky-300 hover:text-sky-200">Privacy Policy</a>.</span>
+            </label>
+            <button type="submit" class="w-full rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-500 py-4 text-lg font-semibold text-slate-950 shadow-lg shadow-slate-950/20 transition duration-300 hover:scale-[1.02] hover:shadow-2xl">Create Account</button>
+          </form>
+
+          <p class="mt-8 text-center text-slate-400">Already have an account? <a href="/login" class="font-semibold text-sky-300 hover:text-sky-200">Login</a></p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordInput = document.getElementById("password");
+    const togglePasswordIcon = document.getElementById("togglePasswordIcon");
+    const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+    const confirmPasswordInput = document.getElementById("confirmPassword");
+    const toggleConfirmPasswordIcon = document.getElementById("toggleConfirmPasswordIcon");
+
+    if (togglePassword) {
+      togglePassword.addEventListener("click", () => {
+        const type = passwordInput.getAttribute("type");
+        if (type === "password") {
+          passwordInput.setAttribute("type", "text");
+          togglePasswordIcon.classList.remove("fa-eye");
+          togglePasswordIcon.classList.add("fa-eye-slash");
+        } else {
+          passwordInput.setAttribute("type", "password");
+          togglePasswordIcon.classList.remove("fa-eye-slash");
+          togglePasswordIcon.classList.add("fa-eye");
+        }
+      });
+    }
+
+    if (toggleConfirmPassword) {
+      toggleConfirmPassword.addEventListener("click", () => {
+        const type = confirmPasswordInput.getAttribute("type");
+        if (type === "password") {
+          confirmPasswordInput.setAttribute("type", "text");
+          toggleConfirmPasswordIcon.classList.remove("fa-eye");
+          toggleConfirmPasswordIcon.classList.add("fa-eye-slash");
+        } else {
+          confirmPasswordInput.setAttribute("type", "password");
+          toggleConfirmPasswordIcon.classList.remove("fa-eye-slash");
+          toggleConfirmPasswordIcon.classList.add("fa-eye");
+        }
+      });
+    }
+  </script>
+</body>
+</html>

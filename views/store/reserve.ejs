@@ -1,0 +1,44 @@
+<%- include('../partials/head') %>
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+  <%- include('../partials/nav') %>
+
+  <main class="flex min-h-[90vh] items-center justify-center px-6 py-12">
+    <div class="w-full max-w-3xl rounded-[32px] border border-slate-800 bg-slate-900/90 p-10 shadow-2xl shadow-slate-950/40">
+      <div class="text-center">
+        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-sky-300">Reservation</p>
+        <h1 class="mt-4 text-4xl font-bold text-white">Confirm Your Stay</h1>
+        <p class="mt-4 text-slate-400">Finish your reservation and lock in a memorable trip with our dark mode booking experience.</p>
+      </div>
+      <div class="mt-10 grid gap-6 rounded-[32px] border border-slate-800 bg-slate-950/80 p-8">
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label class="text-sm font-semibold text-slate-400">Check-in</label>
+            <input type="date" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950/90 px-4 py-3 text-slate-100 outline-none" />
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-slate-400">Check-out</label>
+            <input type="date" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950/90 px-4 py-3 text-slate-100 outline-none" />
+          </div>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label class="text-sm font-semibold text-slate-400">Guests</label>
+            <input type="number" min="1" value="1" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950/90 px-4 py-3 text-slate-100 outline-none" />
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-slate-400">Special requests</label>
+            <input type="text" placeholder="Add a note" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950/90 px-4 py-3 text-slate-100 outline-none" />
+          </div>
+        </div>
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p class="text-sm text-slate-400">Estimated total</p>
+            <p class="text-3xl font-semibold text-white">₹2,950</p>
+          </div>
+          <button class="rounded-2xl bg-sky-500 px-8 py-4 text-lg font-semibold text-slate-950 transition hover:bg-sky-400">Confirm Reservation</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

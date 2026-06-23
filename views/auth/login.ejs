@@ -1,0 +1,74 @@
+<%- include('../partials/head') %>
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+  <%- include('../partials/nav') %>
+
+  <main class="flex min-h-[90vh] items-center justify-center px-6 py-12">
+    <div class="grid w-full max-w-6xl overflow-hidden rounded-[40px] bg-slate-900/95 shadow-2xl shadow-slate-950/40 lg:grid-cols-2">
+      <div class="relative hidden lg:block">
+        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=2070&auto=format&fit=crop" alt="Luxury Home" class="h-full w-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+        <div class="absolute bottom-10 left-10 right-10 text-white">
+          <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm text-slate-100 backdrop-blur-md">
+            <i class="fa-solid fa-house"></i>
+            Airbnb Luxury Stays
+          </div>
+          <h1 class="mt-6 text-5xl font-bold leading-tight">Find your dream stay with comfort & luxury.</h1>
+          <p class="mt-5 text-lg leading-relaxed text-slate-300">Explore premium homes, villas, apartments, and unforgettable experiences around the world.</p>
+        </div>
+      </div>
+      <div class="flex items-center justify-center p-8 sm:p-12">
+        <div class="w-full max-w-md">
+          <div class="mb-10">
+            <div class="mb-4 flex items-center gap-3">
+              <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-800 text-sky-300">
+                <i class="fa-solid fa-user text-2xl"></i>
+              </div>
+              <div>
+                <h2 class="text-4xl font-bold text-white">Welcome Back</h2>
+                <p class="mt-1 text-slate-400">Login to continue your journey</p>
+              </div>
+            </div>
+          </div>
+
+          <%- include('../partials/errors') %>
+
+          <form action="/login" method="POST" class="space-y-6">
+            <div>
+              <label class="mb-2 block text-sm font-semibold text-slate-200">Email Address</label>
+              <div class="relative">
+                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"><i class="fa-solid fa-envelope"></i></span>
+                <input type="email" name="email" placeholder="Enter your email" value="<%= oldInput.email || '' %>" class="w-full rounded-2xl border border-slate-700 bg-slate-950/90 py-4 pl-14 pr-5 text-slate-100 outline-none transition duration-300 focus:border-sky-500 focus:ring-4 focus:ring-slate-800" />
+              </div>
+            </div>
+            <div>
+              <label class="mb-2 block text-sm font-semibold text-slate-200">Password</label>
+              <div class="relative">
+                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"><i class="fa-solid fa-lock"></i></span>
+                <input type="password" name="password" placeholder="Enter your password" class="w-full rounded-2xl border border-slate-700 bg-slate-950/90 py-4 pl-14 pr-5 text-slate-100 outline-none transition duration-300 focus:border-sky-500 focus:ring-4 focus:ring-slate-800" />
+              </div>
+            </div>
+            <div class="flex items-center justify-between text-sm text-slate-400">
+              <label class="flex items-center gap-2"><input type="checkbox" class="h-4 w-4 rounded border-slate-600 bg-slate-950 text-sky-500 focus:ring-sky-500" /> Remember me</label>
+              <a href="#" class="font-medium text-sky-300 hover:text-sky-200">Forgot Password?</a>
+            </div>
+            <button type="submit" class="w-full rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-500 py-4 text-lg font-semibold text-slate-950 shadow-lg shadow-slate-950/20 transition duration-300 hover:scale-[1.02] hover:shadow-2xl">Login</button>
+          </form>
+
+          <div class="my-8 flex items-center">
+            <div class="h-px flex-1 bg-slate-800"></div>
+            <span class="px-4 text-sm text-slate-500">OR</span>
+            <div class="h-px flex-1 bg-slate-800"></div>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <button class="flex items-center justify-center gap-3 rounded-2xl border border-slate-700 bg-slate-950/90 py-3 text-sm font-medium text-slate-100 transition hover:bg-slate-800"><i class="fa-brands fa-google text-red-500"></i> Google</button>
+            <button class="flex items-center justify-center gap-3 rounded-2xl border border-slate-700 bg-slate-950/90 py-3 text-sm font-medium text-slate-100 transition hover:bg-slate-800"><i class="fa-brands fa-facebook text-blue-500"></i> Facebook</button>
+          </div>
+
+          <p class="mt-10 text-center text-slate-400">Don’t have an account? <a href="/signup" class="font-semibold text-sky-300 hover:text-sky-200">Create Account</a></p>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

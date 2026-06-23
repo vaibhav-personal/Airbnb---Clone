@@ -1,0 +1,21 @@
+<%- include('../partials/head') %>
+<body class="min-h-screen bg-slate-50 text-slate-900 antialiased">
+  <%- include('../partials/nav') %>
+
+  <main class="flex min-h-[90vh] items-center justify-center px-6 py-12">
+    <div class="w-full max-w-3xl rounded-[32px] border border-slate-200 bg-white p-10 shadow-2xl shadow-slate-200/80">
+      <div class="text-center">
+        <div class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-slate-100 text-sky-600 shadow-sm">
+          <i class="fa-solid fa-calendar-check text-3xl"></i>
+        </div>
+        <h2 class="text-4xl font-bold text-slate-900 mb-3">No Bookings Yet</h2>
+        <p class="text-slate-600 mb-8">Book your favourite homes and manage your reservations from one place.</p>
+        <a href="/homelist" class="inline-flex items-center gap-2 rounded-full bg-sky-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-sky-500">
+          <i class="fa-solid fa-house"></i>
+          Browse Homes
+        </a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

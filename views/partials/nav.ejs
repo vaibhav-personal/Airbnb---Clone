@@ -1,0 +1,142 @@
+<header class="bg-gradient-to-r from-red-500 via-red-400 to-pink-500 shadow-lg">
+  <nav class="max-w-7xl mx-auto px-6 py-4">
+
+    <div class="flex items-center justify-between">
+
+      <!-- Logo -->
+      <a
+        href="/"
+        class="flex items-center gap-2 text-2xl font-bold tracking-wide text-white"
+      >
+        <i class="fa-solid fa-bed text-3xl"></i>
+        <span>Airbnb</span>
+      </a>
+
+      <!-- NAVIGATION -->
+      <% if(isLoggedIn) { %>
+
+        <ul class="flex items-center gap-2 text-sm font-medium">
+
+          <!-- GUEST NAVBAR -->
+          <% if(user && user.userType === 'guest') { %>
+
+            <li>
+              <a
+                href="/homelist"
+                class="<%= (currentPage === 'homelist')
+                  ? 'bg-white text-red-500 shadow-md'
+                  : 'text-white hover:bg-white/20' %>
+                  flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300"
+              >
+                <i class="fa-solid fa-home"></i>
+                Home Lists
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="/bookings"
+                class="<%= (currentPage === 'bookings')
+                  ? 'bg-white text-red-500 shadow-md'
+                  : 'text-white hover:bg-white/20' %>
+                  flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300"
+              >
+                <i class="fa-solid fa-calendar"></i>
+                My Bookings
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="/favourites"
+                class="<%= (currentPage === 'favourites')
+                  ? 'bg-white text-red-500 shadow-md'
+                  : 'text-white hover:bg-white/20' %>
+                  flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300"
+              >
+                <i class="fa-solid fa-heart"></i>
+                Favourites
+              </a>
+            </li>
+
+          <% } else { %>
+
+            <!-- HOST NAVBAR -->
+
+            <li>
+              <a
+                href="/host/add-home"
+                class="<%= (currentPage === 'add-home')
+                  ? 'bg-white text-red-500 shadow-md'
+                  : 'text-white hover:bg-white/20' %>
+                  flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300"
+              >
+                <i class="fa-solid fa-plus"></i>
+                Register Property
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="/host/host-home-list"
+                class="<%= (currentPage === 'host-home-list')
+                  ? 'bg-white text-red-500 shadow-md'
+                  : 'text-white hover:bg-white/20' %>
+                  flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300"
+              >
+                <i class="fa-solid fa-house"></i>
+                Host Homes
+              </a>
+            </li>
+
+          <% } %>
+
+        </ul>
+
+      <% } %>
+
+      <!-- RIGHT SIDE BUTTON -->
+      <div class="ml-6">
+
+        <% if(!isLoggedIn) { %>
+
+          <a
+            href="/login"
+            class="<%= (currentPage === 'login')
+              ? 'bg-white text-red-500'
+              : 'bg-black/20 text-white hover:bg-white hover:text-red-500' %>
+              flex items-center gap-2 px-5 py-2 rounded-full font-semibold
+              shadow-md backdrop-blur-md transition-all duration-300
+              border border-white/30"
+          >
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            <span>Login</span>
+          </a>
+
+        <% } else { %>
+
+          <form action="/logout" method="POST">
+
+            <button
+              type="submit"
+              class="<%= (currentPage === 'logout')
+                ? 'bg-white text-red-500'
+                : 'bg-black/20 text-white hover:bg-white hover:text-red-500' %>
+                flex items-center gap-2 px-5 py-2 rounded-full
+                font-semibold shadow-md backdrop-blur-md
+                transition-all duration-300 border border-white/30"
+            >
+              <i class="fa-solid fa-right-from-bracket"></i>
+              <span>Logout</span>
+            </button>
+
+          </form>
+
+        <% } %>
+
+      </div>
+
+    </div>
+
+  </nav>
+</header>

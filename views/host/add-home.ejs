@@ -1,0 +1,85 @@
+<%- include('../partials/head') %>
+
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+  <%- include('../partials/nav') %>
+
+  <main class="flex min-h-[90vh] items-center justify-center px-6 py-12">
+    <div class="w-full max-w-4xl rounded-[32px] border border-slate-800 bg-slate-900/90 p-10 shadow-2xl shadow-slate-950/40">
+      <div class="mb-10 text-center">
+        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-sky-300">Host Listing</p>
+        <h1 class="mt-4 text-4xl font-bold text-white"><%= editing ? 'Update Property' : 'Register Property' %></h1>
+        <p class="mt-3 text-slate-400"><%= editing ? 'Make changes to your existing home listing.' : 'Create a new listing to welcome guests.' %></p>
+      </div>
+      <form action="/host/<%= editing ? 'edit-home' : 'add-home' %>" method="POST" enctype="multipart/form-data" class="grid gap-6">
+        <input type="hidden" name="_id" value="<%= editing ? home._id : '' %>" />
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div>
+            <label class="mb-2 block text-sm font-semibold text-slate-300">Property Name</label>
+            <input type="text" name="name" required value="<%= editing ? home.name : '' %>" class="w-full rounded-2xl border border-slate-700 bg-slate-950/90 px-4 py-3 text-slate-100 outline-none focus:border-sky-500 focus:ring-4 focus:ring-slate-800" placeholder="Enter property name" />
+          </div>
+          <div>
+            <label class="mb-2 block text-sm font-semibold text-slate-300">Location</label>
+            <input type="text" name="location" required value="<%= editing ? home.location : '' %>" class="w-full rounded-2xl border border-slate-700 bg-slate-950/90 px-4 py-3 text-slate-100 outline-none focus:border-sky-500 focus:ring-4 focus:ring-slate-800" placeholder="Enter location" />
+          </div>
+        </div>
+        <div>
+          <label class="mb-3 block text-sm font-semibold text-slate-300">
+            Property Images
+          </label>
+ 
+          <label for="photo" class="group relative flex cursor-pointer flex-col items-center justify-center rounded-3xl border-2 border-dashed border-slate-700 bg-gradient-to-br from-slate-900 to-slate-950 px-6 py-10 text-center transition-all duration-300 hover:border-sky-500 hover:bg-slate-900/80 hover:shadow-xl hover:shadow-sky-500/10">
+
+            <!-- Upload Icon -->
+            <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-800 text-sky-400 transition duration-300 group-hover:scale-110 group-hover:bg-sky-500/10">
+
+              <i class="fa-solid fa-cloud-arrow-up text-3xl"></i>
+
+            </div>
+
+            <!-- Main Text -->
+            <h3 class="text-lg font-semibold text-slate-100">
+              Upload Property Photos
+            </h3>
+
+            <!-- Subtext -->
+            <p class="mt-2 text-sm text-slate-400">
+              Drag & drop images here or click to browse
+            </p>
+
+            <!-- File Types -->
+            <span class="mt-3 rounded-full bg-slate-800 px-4 py-1 text-xs font-medium text-slate-300">
+              PNG, JPG, JPEG
+            </span>
+
+            <!-- Hidden Input -->
+            <input id="photo" type="file" name="photo" <%= editing ? '' : 'required' %> accept="image/*" class="hidden" />
+
+          </label>
+
+        </div>
+        <div>
+          <label class="mb-2 block text-sm font-semibold text-slate-300">Description</label>
+          <textarea name="description" rows="4" required class="w-full rounded-2xl border border-slate-700 bg-slate-950/90 px-4 py-3 text-slate-100 outline-none focus:border-sky-500 focus:ring-4 focus:ring-slate-800" placeholder="Describe the home"><%= editing ? home.description : '' %></textarea>
+        </div>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div>
+            <label class="mb-2 block text-sm font-semibold text-slate-300">Price Per Night</label>
+            <input type="number" name="price" min="0" step="0.01" required value="<%= editing ? home.price : '' %>" class="w-full rounded-2xl border border-slate-700 bg-slate-950/90 px-4 py-3 text-slate-100 outline-none focus:border-sky-500 focus:ring-4 focus:ring-slate-800" placeholder="₹" />
+          </div>
+          <div>
+            <label class="mb-2 block text-sm font-semibold text-slate-300">Rating</label>
+            <input type="number" name="rating" min="1" max="5" step="0.1" required value="<%= editing ? home.rating : '' %>" class="w-full rounded-2xl border border-slate-700 bg-slate-950/90 px-4 py-3 text-slate-100 outline-none focus:border-sky-500 focus:ring-4 focus:ring-slate-800" placeholder="1 - 5" />
+          </div>
+        </div>
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <button type="submit" class="rounded-2xl bg-sky-500 px-6 py-4 text-lg font-semibold text-slate-950 transition hover:bg-sky-400"> <%= editing ? 'Save Changes' : 'Register Property' %> </button>
+          <% if (editing) { %>
+          <a href="/host/host-home-list" class="inline-flex items-center justify-center rounded-2xl border border-slate-700 bg-slate-950/90 px-6 py-4 text-sm font-semibold text-slate-100 transition hover:bg-slate-800">Cancel</a>
+          <% } %>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+
+</html>

@@ -1,0 +1,178 @@
+<%- include('../partials/head') %>
+</head>
+
+<body class="bg-[#f7f7f7] min-h-screen">
+
+  <%- include('../partials/nav') %>
+
+  <!-- HERO -->
+  <section class="bg-gradient-to-r from-red-500 to-pink-500 py-16">
+
+    <div class="max-w-7xl mx-auto px-6 text-center text-white">
+
+      <h1 class="text-5xl font-bold">
+        Find Your Perfect Stay
+      </h1>
+
+      <p class="mt-4 text-lg text-red-100">
+        Discover luxury homes, apartments and unforgettable stays.
+      </p>
+
+      <!-- SEARCH -->
+      <div class="mt-8 max-w-3xl mx-auto p-1">
+
+        <div class="flex overflow-hidden rounded-full bg-white shadow-xl">
+
+          <input
+            type="text"
+            placeholder="Search destinations, homes..."
+            class="w-full px-6 py-4 text-gray-700 outline-none"
+          />
+
+          <button
+            class="bg-red-500 px-8 text-white hover:bg-red-600 transition"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- MAIN -->
+  <main class="max-w-7xl mx-auto px-6 py-14">
+
+    <!-- HEADER -->
+    <div class="mb-10">
+
+      <h2 class="text-4xl font-bold text-gray-900">
+        Explore Homes
+      </h2>
+
+      <p class="mt-2 text-gray-500">
+        Premium stays curated for comfort and luxury.
+      </p>
+
+    </div>
+
+    <!-- GRID -->
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+
+      <% registeredHomes.forEach((home) => {
+           const ratingValue = parseFloat(home.rating) || 0;
+           const filledStars = Math.round(ratingValue);
+           const emptyStars = 5 - filledStars;
+      %>
+
+      <!-- CARD -->
+      <div
+        class="group overflow-hidden rounded-2xl bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+      >
+
+        <!-- IMAGE -->
+        <div class="relative h-56 overflow-hidden">
+
+          <% if(home.photo) { %>
+
+            <img
+              src="<%= home.photo %>"
+              alt="<%= home.name %>"
+              class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+            />
+
+          <% } else { %>
+
+            <div class="flex h-full items-center justify-center bg-gray-100 text-gray-400">
+              No Image
+            </div>
+
+          <% } %>
+
+          <!-- HEART -->
+          <button
+            class="absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white shadow hover:bg-red-500 hover:text-white transition"
+          >
+            <i class="fa-solid fa-heart text-sm"></i>
+          </button>
+
+        </div>
+
+        <!-- CONTENT -->
+        <div class="p-4">
+
+          <!-- TITLE -->
+          <div class="flex items-start justify-between gap-3">
+
+            <div>
+
+              <h3 class="text-lg font-semibold text-gray-900">
+                <%= home.name %>
+              </h3>
+
+              <p class="mt-1 flex items-center gap-1 text-sm text-gray-500">
+
+                <i class="fa-solid fa-location-dot text-red-400"></i>
+
+                <%= home.location %>
+
+              </p>
+
+            </div>
+
+            <!-- RATING -->
+            <div class="flex items-center gap-1 rounded-full bg-yellow-50 px-2 py-1 text-sm font-medium text-yellow-700">
+
+              <i class="fa-solid fa-star text-yellow-400"></i>
+
+              <%= ratingValue.toFixed(1) %>
+
+            </div>
+
+          </div>
+
+          <!-- DESCRIPTION -->
+          <p class="mt-3 line-clamp-2 text-sm leading-relaxed text-gray-500">
+
+            <%= home.description || 'Luxury stay with premium amenities and comfort.' %>
+
+          </p>
+
+          <!-- FOOTER -->
+          <div class="mt-5 flex items-center justify-between">
+
+            <div>
+
+              <span class="text-xl font-bold text-gray-900">
+                ₹<%= home.price %>
+              </span>
+
+              <span class="text-sm text-gray-500">
+                /night
+              </span>
+
+            </div>
+
+            <button
+              class="rounded-full bg-red-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-600"
+            >
+              Book
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <% }) %>
+
+    </div>
+
+  </main>
+
+</body>
+</html>
